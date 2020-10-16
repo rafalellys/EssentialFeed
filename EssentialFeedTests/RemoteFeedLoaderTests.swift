@@ -10,7 +10,7 @@ import EssentialFeed
 
 
 class RemoteFeedLoaderTests: XCTestCase {
-
+    
     func test_init_doesNotRequestDataFromURL() {
         let (_, client) = makeSUT()
         
@@ -51,12 +51,16 @@ class RemoteFeedLoaderTests: XCTestCase {
         
         let (sut, client) = makeSUT()
         
-        var capturedErrors = [RemoteFeedLoader.Error]()
-        sut.load { capturedErrors.append($0)}
-        
-        client.complete(withStatusCode: 400)
-        
-        XCTAssertEqual(capturedErrors, [.invalidData])
+        let samples = [199,201,300,400,500]
+        samples.enumerated().forEach { index, code in
+            
+            var capturedErrors = [RemoteFeedLoader.Error]()
+            sut.load { capturedErrors.append($0)}
+            
+            client.complete(withStatusCode: code, at: index)
+            
+            XCTAssertEqual(capturedErrors, [.invalidData])
+        }
     }
     
     // MARK: - Helpers
@@ -75,7 +79,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         var requestedURLs: [URL] {
             return messages.map{$0.url}
         }
-
+        
         func get(from url: URL, completion: @escaping (Error?, HTTPURLResponse?) -> Void) {
             messages.append((url,completion))
         }
