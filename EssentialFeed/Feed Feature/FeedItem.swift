@@ -26,6 +26,6 @@ extension FeedItem: Decodable {
         case id
         case description
         case location
-        case imageURL = "image"
+        case imageURL
     }
 }
