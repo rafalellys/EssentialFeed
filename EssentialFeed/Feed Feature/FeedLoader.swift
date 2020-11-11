@@ -12,7 +12,6 @@ enum LoadFeedResult {
     case error(Error)
 }
 
-
 //boundary between API and UI
 protocol FeedLoader {
     func load(completion: @escaping (LoadFeedResult) -> Void)
