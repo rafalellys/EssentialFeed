@@ -13,6 +13,6 @@ public enum LoadFeedResult {
 }
 
 //boundary between API and UI
-protocol FeedLoader {
+public protocol FeedLoader {
     func load(completion: @escaping (LoadFeedResult) -> Void)
 }
