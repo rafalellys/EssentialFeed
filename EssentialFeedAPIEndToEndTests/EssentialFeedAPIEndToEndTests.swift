@@ -11,7 +11,6 @@ import EssentialFeed
 class EssentialFeedAPIEndToEndTests: XCTestCase {
 
     func test_endToEndTestServerGETFeedResult_matcheFixedTestAccountData() {
-        
         switch getFeedResult() {
          case let .success(items)?:
              XCTAssertEqual(items.count, 8, "Expected 8 items in the test account feed")
@@ -41,7 +40,6 @@ class EssentialFeedAPIEndToEndTests: XCTestCase {
         trackMemoryLeaks(client, file: file, line: line)
         trackMemoryLeaks(loader, file: file, line: line)
 
-        
         let exp = expectation(description: "Wait for load completion")
         
         var receivedResult: LoadFeedResult?
